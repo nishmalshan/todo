@@ -1,92 +1,277 @@
-.App {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100vw;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .addTask {
-    height: 30vh;
-    background-color: dodgerblue;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .list {
-    height: auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: 50px;
-    flex-direction: column;
-  }
+/* Modern Todo App Styling */
+:root {
+  --primary-color: #4a6fa5;
+  --secondary-color: #166088;
+  --accent-color: #4fc08d;
+  --danger-color: #e15554;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Header and Input Area */
+.addTask {
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.addTask-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-title {
+  color: white;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.addTask input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius) 0 0 var(--radius);
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.addTask input:focus {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(79, 192, 141, 0.3);
+}
+
+.addTask button {
+  background-color: var(--accent-color);
+  padding: 12px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addTask button:hover {
+  background-color: #3da978;
+}
+
+.addTask button:active {
+  transform: translateY(1px);
+}
+
+/* Task List */
+.list {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.list-header {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--dark-color);
+}
+
+.sub-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sub-list:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.sub-list h4 {
+  font-size: 1.1rem;
+  color: var(--dark-color);
+  margin-left: 10px;
+  word-break: break-word;
+  flex: 1;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Edit Mode */
+.edit-mode {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-mode input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.edit-mode button {
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Buttons */
+.editBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.editBtn:hover {
+  background-color: #3b5a84;
+}
+
+.deleteBtn {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.deleteBtn:hover {
+  background-color: #c73e3e;
+}
+
+button.save-btn {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+button.save-btn:hover {
+  background-color: #3da978;
+}
+
+button.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+button.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Empty state */
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+.empty-list p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .addTask {
+    padding: 1.5rem 1rem;
+  }
+  
+  .app-title {
+    font-size: 1.5rem;
+  }
+  
   .sub-list {
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: aliceblue;
-    border-radius: 8px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    padding: 0px 30px;
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .task-content {
+    width: 100%;
     margin-bottom: 10px;
   }
-
-  .sub-list h4 {
-    width: 50%;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  
+  .task-buttons {
+    width: 100%;
+    justify-content: flex-end;
   }
   
-  .task {
-    width: 500px;
-    height: 50px;
-    display: flex;
-    margin: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .addTask input {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  .edit-mode {
+    flex-direction: column;
   }
   
-  .addTask button {
-    background-color: rgb(0, 170, 0);
-    width: auto;
-    margin-left: 5px;
-    padding: 10px 13px;
-    text-align: center;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border-radius: 5px;
-    border: none;
-    color: white;
+  .edit-mode button {
+    padding: 8px 12px;
   }
-
-
-  .deleteBtn {
-    background-color: blueviolet;
-    border: none;
-    margin: 10px;
-    padding: 6px 10px;
-    color: white;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border-radius: 5px;
-   }
-
-
-  
+}

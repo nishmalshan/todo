@@ -1,6 +1,5 @@
 export const Task = (prop) => {
-
-    const {
+  const {
         taskName,
         id,
         deleteTask,
@@ -11,25 +10,40 @@ export const Task = (prop) => {
         saveEdit,
         cancelEdit
       } = prop;
-      
-    return (
-        <div className='sub-list'>
-            {editingTaskId === id ? (
-                <div>
-                    <input type="text" value={editedTaskName} onChange={(e) => setEditedTaskName(e.target.value)} />
-                    <button onClick={saveEdit}>Save</button>
-                    <button onClick={cancelEdit}>Cancel</button>
-                </div>
-            ) : (
-                <>
-                <h4>{prop.taskName}</h4>
-                <div>
-                <button className="editBtn" onClick={() => startEditing(id, taskName)}>Edit</button>
-                <button className='deleteBtn' onClick={() => deleteTask(id)}> X </button>
-                </div>
-                </>
-            )}
-        </div>
-      )
-}
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      saveEdit();
+    } else if (e.key === 'Escape') {
+      cancelEdit();
+    }
+  };
+
+  return (
+    <div className="sub-list">
+      {editingTaskId === id ? (
+        <div className="edit-mode">
+          <input
+            type="text"
+            value={editedTaskName}
+            onChange={(e) => setEditedTaskName(e.target.value)}
+            onKeyDown={handleKeyPress}
+            autoFocus
+          />
+          <button className="save-btn" onClick={saveEdit}>Save</button>
+          <button className="cancel-btn" onClick={cancelEdit}>Cancel</button>
+        </div>
+      ) : (
+        <>
+          <div className="task-content">
+            <h4>{taskName}</h4>
+          </div>
+          <div className="task-buttons">
+            <button className="editBtn" onClick={() => startEditing(id, taskName)}>Edit</button>
+            <button className="deleteBtn" onClick={() => deleteTask(id)}>Delete</button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
